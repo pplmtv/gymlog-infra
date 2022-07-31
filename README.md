@@ -1,2 +1,2 @@
-# gymlog_backend
-gymlog_backend
+# gymlog-infra
+gymlog-infra
