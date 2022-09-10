@@ -41,11 +41,9 @@ resource "aws_iam_role_policy_attachment" "role_deployer_policy_ecr_power_user" 
   policy_arn = data.aws_iam_policy.ecr_power_user.arn
 }
 
-/*
 resource "aws_iam_role_policy" "s3" {
   name = "s3"
   role = aws_iam_role.deployer.id
-
 
   policy = jsonencode(
     {
@@ -73,7 +71,6 @@ resource "aws_iam_role_policy" "s3" {
 resource "aws_iam_role_policy" "ecs" {
   name = "ecs"
   role = aws_iam_role.deployer.id
-
 
   policy = jsonencode(
     {
@@ -135,12 +132,11 @@ resource "aws_iam_role_policy" "ecs" {
             "logs:GetLogEvents"
           ],
           "Resource" : [
-            data.aws_cloudwatch_log_group.nginx.arn,
-            data.aws_cloudwatch_log_group.php.arn
+            data.aws_cloudwatch_log_group.frontend.arn,
+            data.aws_cloudwatch_log_group.backend.arn
           ]
         }
       ]
     }
   )
 }
-*/
