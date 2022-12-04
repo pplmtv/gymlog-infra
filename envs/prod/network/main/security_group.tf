@@ -51,8 +51,8 @@ resource "aws_security_group" "vpc" {
   }
 }
 
-resource "aws_security_group" "db_gymlog-app" {
-  name   = "${aws_vpc.this.tags.Name}-db-gymlog-app"
+resource "aws_security_group" "db" {
+  name   = "${aws_vpc.this.tags.Name}-db"
   vpc_id = aws_vpc.this.id
 
   ingress {
@@ -70,12 +70,12 @@ resource "aws_security_group" "db_gymlog-app" {
   }
 
   tags = {
-    Name = "${aws_vpc.this.tags.Name}-db-gymlog-app"
+    Name = "${aws_vpc.this.tags.Name}-db"
   }
 }
 
-resource "aws_security_group" "cache_gymlog-app" {
-  name   = "${aws_vpc.this.tags.Name}-cache-gymlog-app"
+resource "aws_security_group" "cache" {
+  name   = "${aws_vpc.this.tags.Name}-cache"
   vpc_id = aws_vpc.this.id
 
   ingress {
@@ -94,6 +94,6 @@ resource "aws_security_group" "cache_gymlog-app" {
 
 
   tags = {
-    Name = "${aws_vpc.this.tags.Name}-cache-gymlog-app"
+    Name = "${aws_vpc.this.tags.Name}-cache"
   }
 }

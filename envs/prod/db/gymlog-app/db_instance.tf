@@ -9,7 +9,7 @@ resource "aws_db_instance" "this" {
 
 
   // Credentials Settings
-  username = local.service_name
+  username = "gymlog"
   password = "MustChangeStrongPassword!"
 
 
@@ -42,7 +42,7 @@ resource "aws_db_instance" "this" {
 
 
   // Database options
-  name                 = local.service_name
+  name                 = "gymlog"
   parameter_group_name = aws_db_parameter_group.this.name
   option_group_name    = aws_db_option_group.this.name
 

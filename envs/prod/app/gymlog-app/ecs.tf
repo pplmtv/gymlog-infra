@@ -12,17 +12,17 @@ resource "aws_ecs_cluster" "this" {
 }
 
 resource "aws_ecs_task_definition" "this" {
-  family = "${local.name_prefix}-${local.service_name}"
+  family        = "${local.name_prefix}-${local.service_name}"
   task_role_arn = aws_iam_role.ecs_task.arn
-  network_mode = "awsvpc"
+  network_mode  = "awsvpc"
 
   requires_compatibilities = [
     "FARGATE",
   ]
 
   execution_role_arn = aws_iam_role.ecs_task_execution.arn
-  memory = "512"
-  cpu    = "256"
+  memory             = "512"
+  cpu                = "256"
 
   container_definitions = jsonencode(
     [
@@ -45,12 +45,12 @@ resource "aws_ecs_task_definition" "this" {
           }
         ]
 
-##        mountPoints = [
-##          {
-##            containerPath = "/var/run/php-fpm"
-##            sourceVolume  = "php-fpm-socket"
-##          }
-##        ]
+        ##        mountPoints = [
+        ##          {
+        ##            containerPath = "/var/run/php-fpm"
+        ##            sourceVolume  = "php-fpm-socket"
+        ##          }
+        ##        ]
 
         logConfiguration = {
           logDriver = "awslogs"
@@ -71,19 +71,19 @@ resource "aws_ecs_task_definition" "this" {
           }
         ]
         environment = []
-#        secrets = [
-#          {
-#            name      = "APP_KEY"
-#            valueFrom = "/${local.system_name}/${local.env_name}/${local.service_name}/APP_KEY"
-#          }
-#        ]
+        #        secrets = [
+        #          {
+        #            name      = "APP_KEY"
+        #            valueFrom = "/${local.system_name}/${local.env_name}/${local.service_name}/APP_KEY"
+        #          }
+        #        ]
 
-##        mountPoints = [
-##          {
-##            containerPath = "/var/run/php-fpm"
-##            sourceVolume  = "php-fpm-socket"
-##          }
-##        ]
+        ##        mountPoints = [
+        ##          {
+        ##            containerPath = "/var/run/php-fpm"
+        ##            sourceVolume  = "php-fpm-socket"
+        ##          }
+        ##        ]
 
         logConfiguration = {
           logDriver = "awslogs"
@@ -97,9 +97,9 @@ resource "aws_ecs_task_definition" "this" {
     ]
   )
 
-##  volume {
-##    name = "php-fpm-socket"
-##  }
+  ##  volume {
+  ##    name = "php-fpm-socket"
+  ##  }
 
   tags = {
     Name = "${local.name_prefix}-${local.service_name}"
@@ -107,7 +107,7 @@ resource "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_ecs_service" "this" {
-  name = "${local.name_prefix}-${local.service_name}"
+  name    = "${local.name_prefix}-${local.service_name}"
   cluster = aws_ecs_cluster.this.arn
 
   capacity_provider_strategy {
@@ -116,8 +116,8 @@ resource "aws_ecs_service" "this" {
     weight            = 1
   }
 
-  platform_version = "1.4.0"
-  task_definition = aws_ecs_task_definition.this.arn
+  platform_version                   = "1.4.0"
+  task_definition                    = aws_ecs_task_definition.this.arn
   desired_count                      = var.desired_count
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent         = 200
@@ -139,6 +139,11 @@ resource "aws_ecs_service" "this" {
       for s in data.terraform_remote_state.network_main.outputs.subnet_private : s.id
     ]
   }
+
+  service_registries {
+    registry_arn = data.terraform_remote_state.routing_gymlog-app_internal.outputs.service_discovery_service_arn
+  }
+
 
   enable_execute_command = true
 
