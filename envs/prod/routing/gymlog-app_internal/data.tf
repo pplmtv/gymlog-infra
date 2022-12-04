@@ -8,7 +8,6 @@ data "terraform_remote_state" "network_main" {
   }
 }
 
-/*
 data "terraform_remote_state" "db_gymlog-app" {
   backend = "s3"
 
@@ -19,6 +18,7 @@ data "terraform_remote_state" "db_gymlog-app" {
   }
 }
 
+/*
 data "terraform_remote_state" "cache_gymlog-app" {
   backend = "s3"
 

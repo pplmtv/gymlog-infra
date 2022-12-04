@@ -7,11 +7,11 @@ output "security_group_vpc_id" {
 }
 
 output "security_group_db_gymlog-app_id" {
-  value = aws_security_group.db_gymlog-app.id
+  value = aws_security_group.db.id
 }
 
 output "security_group_cache_gymlog-app_id" {
-  value = aws_security_group.cache_gymlog-app.id
+  value = aws_security_group.cache.id
 }
 
 output "subnet_public" {
