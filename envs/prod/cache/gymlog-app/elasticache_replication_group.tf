@@ -19,7 +19,7 @@ resource "aws_elasticache_replication_group" "this" {
 
   // Security
   security_group_ids = [
-    data.terraform_remote_state.network_main.outputs.security_group_cache_gymlog-app_id
+    data.terraform_remote_state.network_main.outputs.security_group_cache_id
   ]
   at_rest_encryption_enabled = true
   transit_encryption_enabled = false

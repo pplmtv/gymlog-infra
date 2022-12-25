@@ -60,6 +60,7 @@ resource "aws_security_group" "db" {
     to_port   = 0
     protocol  = "-1"
     self      = true
+    security_groups = [aws_security_group.ope.id]
   }
 
   egress {
@@ -95,5 +96,29 @@ resource "aws_security_group" "cache" {
 
   tags = {
     Name = "${aws_vpc.this.tags.Name}-cache"
+  }
+}
+
+resource "aws_security_group" "ope" {
+  name   = "${aws_vpc.this.tags.Name}-ope"
+  vpc_id = aws_vpc.this.id
+
+  ingress {
+    from_port = 3306
+    to_port   = 3306
+    protocol  = "tcp"
+    self      = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  tags = {
+    Name = "${aws_vpc.this.tags.Name}-ope"
   }
 }
