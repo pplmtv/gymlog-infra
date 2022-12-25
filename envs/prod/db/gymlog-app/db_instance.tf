@@ -31,7 +31,8 @@ resource "aws_db_instance" "this" {
   db_subnet_group_name = data.terraform_remote_state.network_main.outputs.db_subnet_group_this_id
   publicly_accessible  = false
   vpc_security_group_ids = [
-    data.terraform_remote_state.network_main.outputs.security_group_db_gymlog-app_id,
+    data.terraform_remote_state.network_main.outputs.security_group_db_id,
+    data.terraform_remote_state.network_main.outputs.security_group_ope_id,
   ]
   availability_zone = "ap-northeast-1a"
   port              = 3306

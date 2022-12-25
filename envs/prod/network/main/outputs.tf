@@ -6,12 +6,16 @@ output "security_group_vpc_id" {
   value = aws_security_group.vpc.id
 }
 
-output "security_group_db_gymlog-app_id" {
+output "security_group_db_id" {
   value = aws_security_group.db.id
 }
 
-output "security_group_cache_gymlog-app_id" {
+output "security_group_cache_id" {
   value = aws_security_group.cache.id
+}
+
+output "security_group_ope_id" {
+  value = aws_security_group.ope.id
 }
 
 output "subnet_public" {
