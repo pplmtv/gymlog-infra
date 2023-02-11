@@ -56,10 +56,11 @@ resource "aws_security_group" "db" {
   vpc_id = aws_vpc.this.id
 
   ingress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    self      = true
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    self            = true
+    security_groups = [aws_security_group.vpc.id]
   }
 
   egress {
