@@ -14,10 +14,6 @@ output "security_group_cache_id" {
   value = aws_security_group.cache.id
 }
 
-output "security_group_ope_id" {
-  value = aws_security_group.ope.id
-}
-
 output "subnet_public" {
   value = aws_subnet.public
 }
