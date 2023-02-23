@@ -28,12 +28,12 @@ data "aws_lb_target_group" "this" {
   name = "${local.name_prefix}-${local.service_name}"
 }
 
-data "aws_security_group" "cache_gymlog-app" {
-  name = "${local.name_prefix}-main-cache-gymlog-app"
+data "aws_security_group" "cache" {
+  name = "${local.name_prefix}-main-cache"
 }
 
-data "aws_security_group" "db_gymlog-app" {
-  name = "${local.name_prefix}-main-db-gymlog-app"
+data "aws_security_group" "db" {
+  name = "${local.name_prefix}-main-db"
 }
 
 data "aws_security_group" "vpc" {
